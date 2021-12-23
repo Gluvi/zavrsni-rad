@@ -24,9 +24,9 @@ class Send extends Component {
             onChange={e => this.onChange(e)}
             value={this.state.text}
             type="text"
-            placeholder="Enter your message and press ENTER"
+            placeholder="Unesite poruku"
           />
-          <button>Send</button>
+          {(this.state.text !== '') ? <button >Pošalji</button> : <button disabled style={{display: "none"}}>Pošalji</button>}
         </form>
       </div>
     );

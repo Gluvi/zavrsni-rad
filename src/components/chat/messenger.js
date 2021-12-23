@@ -78,7 +78,6 @@ class Messenger extends Component {
       message
     });
     this.setState({message});
-    console.log('Poruka: ' + message);
   }
 
 }
