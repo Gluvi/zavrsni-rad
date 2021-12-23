@@ -1,22 +1,35 @@
 import React, { Component } from 'react';
-import CreateUser from '../user/createUser';
 import Messages from "./messages";
 import Send from "./send";
 
-let name = 'gluvi';
-let boja = 'purple';
 const CHANNELID = '5D9V0tsX5DxmjSvr';
 
-// function randomColor() {
-//   return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
-// }
+function randomBoje() {
+  return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
+}
+
+function randomIme() {
+  const imena = [
+    "Ante", "Mijo", "Ivana", "Ivan", "Anita", "Jadranka", "Mišo", "Matej",
+    "Jelena", "Ivica", "Livio", "Margita", "Josipa", "Nataša", "Ana", "Lenka",
+    "Valentina", "Martin", "Dario", "Mate", "Domagoj", "Maja", "Petra",
+  ];
+  const prezimena = [
+    "Čorić", "Ivanišević", "Jelavić", "Burmaz", "Gašpar", "Barbir", "Nosić", "Leić",
+    "Dugić", "Kratkić", "Širić", "Uzić", "Našić", "Vašić", "Bogunović", "Kožar",
+    "Smirić", "Trzić", "Poljarić", "Stanić", "Kužić", "Malagić", "Todorić", "Paunović"
+  ];
+  const ime = imena[Math.floor(Math.random() * imena.length)];
+  const prezime = prezimena[Math.floor(Math.random() * prezimena.length)];
+  return ime + ' ' + prezime;
+}
 
 class Messenger extends Component {
   state = {
     messages: [],
     member: {
-      username: name,
-      color: boja,
+      username: randomIme(),
+      color: randomBoje(),
     }
   }
 
@@ -42,12 +55,12 @@ class Messenger extends Component {
   }
 
   render() {
+
     return (
       <div className="App">
         <div className="App-header">
-          <h1>My Chat App</h1>
+          <h1>Chat - Završni ispit</h1>
         </div>
-        <CreateUser />
         <Messages
           messages={this.state.messages}
           currentMember={this.state.member}
@@ -64,6 +77,8 @@ class Messenger extends Component {
       room: "observable-room",
       message
     });
+    this.setState({message});
+    console.log('Poruka: ' + message);
   }
 
 }
