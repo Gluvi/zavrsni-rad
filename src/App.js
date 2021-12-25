@@ -1,12 +1,13 @@
 import React from 'react';
-import Messenger from './components/chat/messenger';
+import Chat from './components/chat/Chat'
 import './App.css';
 
 function App() {
 
   return(
-    <div>
-      <Messenger />
+    <div className='App'>
+      <h1>Završni rad - Chat</h1>
+      <Chat />
     </div>
   );
 }
