@@ -2,7 +2,8 @@ import React from "react";
 import Message from './Message';
 class Messages extends React.Component {
   render() {
-    const {messages, currentUser} = this.props;
+    const {messages, currentMember} = this.props;
+
     return (
       <div className="Messages-list">
         {messages.map((m, index) => (

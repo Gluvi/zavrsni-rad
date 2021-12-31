@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types'
+import React, { useState, useEffect } from 'react';
 
 function UserLogin({submitMember}) {
     const [username, setUsername] = useState('');
@@ -7,15 +6,11 @@ function UserLogin({submitMember}) {
     const handleChangeMemberName = (e) => {
         const changeMember = e.target.value;
         setUsername(changeMember);
-        console.log(changeMember);
     }
 
     const handleSubmitMemberName = (e) => {
         e.preventDefault();
-        console.log('********');
-        console.log(username);
-        console.log('********');
-        submitMember(username);
+        submitMember(username.trimEnd().trimStart());
         setUsername('');
     }
 
@@ -23,16 +18,11 @@ function UserLogin({submitMember}) {
         <div className='userLogin'>
             <h1>User Login</h1>
             <form onSubmit={handleSubmitMemberName}>
-                <input onChange={handleChangeMemberName} value={username} />
-                <button type='submit' >Add User</button>
-                <h5></h5>
+                <input onChange={handleChangeMemberName} value={username} autoFocus={true} />
+                <button type='submit' >Login</button>
             </form>
         </div>
     );
 }
 
 export default UserLogin;
-
-// UserLogin.propTypes = {
-//     submitUsername: PropTypes.func.isRequired;
-// }
