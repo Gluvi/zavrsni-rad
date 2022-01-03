@@ -7,7 +7,7 @@ class Messages extends React.Component {
     return (
       <div className="Messages-list">
         {messages.map((m, index) => (
-          <Message key={index} message={m} />
+          <Message key={index} message={m} member={messages.message} />
         ))}
       </div>
     );

@@ -3,49 +3,43 @@ import UserLogin from '../user/UserLogin';
 import Messages from './Messages';
 import SendMessage from './SendMessage';
 
-const drone = new window.Scaledrone('5D9V0tsX5DxmjSvr');
+// const drone = new window.Scaledrone('5D9V0tsX5DxmjSvr');
 const soba = 'observable-soba';
 
 class Chat extends React.Component {
   state = {
-    messages: [
-      {
-        text: "This is a test message!",
-        member: {
-          color: "blue",
-          username: "bluemoon",
-        }
-      }
-    ],
+    messages: [],
     member: {
       username: '',
-      color: 'red',
+      color: '',
     }
-  }
-
-  componentDidMount(){
-    drone.on('open', error => {
-      // Connection has been opened if no error
-      console.log('Succesfully connected to the Scaledrone');
-    });
   }
   
   handleSubmitMember = (memberName) => {
-    this.setState({member: {username: memberName, color: 'blue'}});
-    console.log('Member ' + memberName + ' logged in');
+    this.setState({member: {username: memberName, color: 'pink'}});
 
-    const room = drone.subscribe(soba);
-    room.on('open', error => {
-      if (error) {
+    this.drone = new window.Scaledrone("5D9V0tsX5DxmjSvr", {
+      data: this.state.member,
+    });
+    this.drone.on('open', error => {
+      if(error){
         return console.error(error);
       }
-      // Connected to room
-      console.log('Connected to the room ' + room.name);
-    });
 
-    room.on('message', message => {
-      // Received message from room
-      console.log(message);
+      const member = {...this.state.member};
+      member.id = this.drone.clientId;
+      this.setState({member});
+
+      const room = this.drone.subscribe(soba);
+      room.on('data', (data, member) => {
+        const messages = this.state.messages;
+        messages.push({member, text: data});
+        this.setState({messages})
+      });
+  
+      console.log(this.state.member);
+      console.log(this.state.messages);
+
     });
 
   }
@@ -56,24 +50,22 @@ class Chat extends React.Component {
   }
 
   handleSendMessage = (message) => {
-    drone.publish({
+    this.drone.publish({
       room: soba,
-      message: {text: message, member: this.state.member}
+      message,
     });
+
+    console.log(message);
   }
 
   render() {
-    drone.on('error', error => {
-      // An error has occurred with the connection
-      console.log(error);
-    });
         
     return(
       <div>
         <h1>Chat</h1>
         {(this.state.member.username !== '') ? (
           <div>
-            <Messages messages={this.state.messages} />
+            <Messages messages={this.state.messages} currentMember={this.state.member} />
             <SendMessage onSendMessage={this.handleSendMessage} />
             <button onClick={this.handleLogoutMember}>Logout</button>
           </div>
