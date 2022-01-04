@@ -22,7 +22,7 @@ class Chat extends React.Component {
         data: {username: user, color: randomColor()}
       });
   
-      console.log('Member ' + user + ' connected');
+      console.log('User ' + user + ' logged in');
   
       this.drone.on('open', error => {
         if (error) {
@@ -32,7 +32,7 @@ class Chat extends React.Component {
         member.id = this.drone.clientId;
         this.setState({member});
   
-        console.log('Data loaded');
+        console.log('Data succesfully loaded');
   
       });
       const room = this.drone.subscribe("observable-soba");
@@ -50,6 +50,13 @@ class Chat extends React.Component {
     }
   }
 
+  handleOnUserLogout = () => {
+    this.setState({member: {}});
+    this.drone.close();
+
+    console.log('User logged out');
+  }
+
   render() {
     return (
       <div className="chat">
@@ -64,7 +71,9 @@ class Chat extends React.Component {
               />
               <SendMessage
                 onSendMessage={this.onSendMessage}
+                onUserLogout={this.handleOnUserLogout}
               />
+              <button className='btnLogout' onClick={this.handleOnUserLogout}>Logout</button>
             </div>
             )
           }
