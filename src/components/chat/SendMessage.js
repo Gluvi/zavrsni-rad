@@ -8,8 +8,8 @@ class SendMessage extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     if (this.state.text !== ''){
-      this.setState({text: ""});
       this.props.onSendMessage(this.state.text);
+      this.setState({text: ""});
       }
       else {
         console.log('Cannot be empty');

@@ -1,10 +1,11 @@
 import React from 'react';
 import UserLogin from '../user/UserLogin';
-import Messages from './Messages';
-import SendMessage from './SendMessage';
+import Messages from "./Messages";
+import SendMessage from "./SendMessage";
 
-// const drone = new window.Scaledrone('5D9V0tsX5DxmjSvr');
-const soba = 'observable-soba';
+function randomColor() {
+  return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
+}
 
 class Chat extends React.Component {
   state = {
@@ -14,65 +15,68 @@ class Chat extends React.Component {
       color: '',
     }
   }
-  
-  handleSubmitMember = (memberName) => {
-    this.setState({member: {username: memberName, color: 'pink'}});
 
+  handleOnUserLogin = (user) => {
     this.drone = new window.Scaledrone("5D9V0tsX5DxmjSvr", {
-      data: this.state.member,
+      data: {username: user, color: randomColor()}
     });
-    console.log('Member ' + memberName +' logged in');
-  }
 
-  handleLogoutMember = () => {
-    this.setState({member: {username: '', color: 'red'}});
-    console.log('Member ' + this.state.member.username +' logged out');
-  }
-
-  handleSendMessage = (message) => {
+    console.log('Member connected');
 
     this.drone.on('open', error => {
-      if(error){
+      if (error) {
         return console.error(error);
       }
-
       const member = {...this.state.member};
       member.id = this.drone.clientId;
       this.setState({member});
-    });
 
-    const room = this.drone.subscribe(soba);
-    room.on('data', (data, id, member) => {
+      console.log('Member to state finished');
+
+    });
+    const room = this.drone.subscribe("observable-soba");
+    room.on('data', (data, member) => {
       const messages = this.state.messages;
-      messages.push({member, text: data, id: id});
+      messages.push({member, text: data});
       this.setState({messages});
-      console.log('********');
-      console.log({messages});
-      console.log('********');
-  
-    });
 
-    this.drone.publish({
-      room: soba,
-      message,
+      console.log('Room subscribed');
+
     });
   }
 
   render() {
-        
-    return(
-      <div>
-        {(this.state.member.username !== '') ? (
-          <div>
-            <Messages messages={this.state.messages} currentMember={this.state.member} />
-            <SendMessage onSendMessage={this.handleSendMessage} />
-            <button onClick={this.handleLogoutMember}>Logout</button>
-          </div>
-        ) : (<UserLogin submitMember={this.handleSubmitMember} />)}
-        
+    return (
+      <div className="App">
+        <div className="App-header">
+          <h1>My Chat App</h1>
+        </div>
+          {
+            (!this.state.member.id) ? 
+            (<UserLogin onUserLogin={this.handleOnUserLogin}/>) : 
+            (
+            <div>
+              <Messages
+                messages={this.state.messages}
+                currentMember={this.state.member}
+              />
+              <SendMessage
+                onSendMessage={this.onSendMessage}
+              />
+            </div>
+            )
+          }
       </div>
     );
   }
+
+  onSendMessage = (message) => {
+    this.drone.publish({
+      room: "observable-soba",
+      message
+    });
+  }
+
 }
 
 export default Chat;

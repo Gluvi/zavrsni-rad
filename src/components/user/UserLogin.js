@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function UserLogin({submitMember}) {
+function UserLogin({onUserLogin}) {
     const [username, setUsername] = useState('');
 
     const handleChangeMemberName = (e) => {
@@ -10,7 +10,7 @@ function UserLogin({submitMember}) {
 
     const handleSubmitMemberName = (e) => {
         e.preventDefault();
-        submitMember(username.trimEnd().trimStart());
+        onUserLogin(username.trimEnd().trimStart());
         setUsername('');
     }
 
