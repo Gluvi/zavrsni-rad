@@ -52,10 +52,7 @@ class Chat extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <h1>My Chat App</h1>
-        </div>
+      <div className="chat">
           {
             (!this.state.member.id) ? 
             (<UserLogin onUserLogin={this.handleOnUserLogin}/>) : 
