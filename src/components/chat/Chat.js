@@ -29,17 +29,6 @@ class Chat extends React.Component {
       const member = {...this.state.member};
       member.id = this.drone.clientId;
       this.setState({member});
-
-      const room = this.drone.subscribe(soba);
-      room.on('data', (data, member) => {
-        const messages = this.state.messages;
-        messages.push({member, text: data});
-        this.setState({messages})
-      });
-  
-      console.log(this.state.member);
-      console.log(this.state.messages);
-
     });
 
   }
@@ -50,19 +39,27 @@ class Chat extends React.Component {
   }
 
   handleSendMessage = (message) => {
+    const room = this.drone.subscribe(soba);
+    room.on('data', (data, id, member) => {
+      const messages = this.state.messages;
+      messages.push({member: this.state.member, text: data, id: id});
+      this.setState({messages});
+      console.log('********');
+      console.log({messages});
+      console.log('********');
+  
+    });
+
     this.drone.publish({
       room: soba,
       message,
     });
-
-    console.log(message);
   }
 
   render() {
         
     return(
       <div>
-        <h1>Chat</h1>
         {(this.state.member.username !== '') ? (
           <div>
             <Messages messages={this.state.messages} currentMember={this.state.member} />

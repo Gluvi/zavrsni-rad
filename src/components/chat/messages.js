@@ -2,12 +2,12 @@ import React from "react";
 import Message from './Message';
 class Messages extends React.Component {
   render() {
-    const {messages} = this.props;
+    const {messages, currentMember} = this.props;
 
     return (
       <div className="Messages-list">
         {messages.map((m, index) => (
-          <Message key={index} message={m} member={messages.message} />
+          <Message key={index} message={m} member={currentMember} />
         ))}
       </div>
     );
