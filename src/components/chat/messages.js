@@ -1,6 +1,10 @@
 import React from "react";
 import Message from './Message';
+
+let me = false;
+
 class Messages extends React.Component {
+
   render() {
     const {messages} = this.props;
     const {currentMember} = this.props;

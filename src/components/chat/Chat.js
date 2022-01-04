@@ -17,32 +17,37 @@ class Chat extends React.Component {
   }
 
   handleOnUserLogin = (user) => {
-    this.drone = new window.Scaledrone("5D9V0tsX5DxmjSvr", {
-      data: {username: user, color: randomColor()}
-    });
-
-    console.log('Member connected');
-
-    this.drone.on('open', error => {
-      if (error) {
-        return console.error(error);
-      }
-      const member = {...this.state.member};
-      member.id = this.drone.clientId;
-      this.setState({member});
-
-      console.log('Member to state finished');
-
-    });
-    const room = this.drone.subscribe("observable-soba");
-    room.on('data', (data, member) => {
-      const messages = this.state.messages;
-      messages.push({member, text: data});
-      this.setState({messages});
-
-      console.log('Room subscribed');
-
-    });
+    if (user !== ''){
+      this.drone = new window.Scaledrone("5D9V0tsX5DxmjSvr", {
+        data: {username: user, color: randomColor()}
+      });
+  
+      console.log('Member ' + user + ' connected');
+  
+      this.drone.on('open', error => {
+        if (error) {
+          return console.error(error);
+        }
+        const member = {...this.state.member};
+        member.id = this.drone.clientId;
+        this.setState({member});
+  
+        console.log('Data loaded');
+  
+      });
+      const room = this.drone.subscribe("observable-soba");
+      room.on('data', (data, member) => {
+        const messages = this.state.messages;
+        messages.push({member, text: data});
+        this.setState({messages});
+  
+        console.log('Room subscribed');
+  
+      });
+    }
+    else {
+      console.log('Enter username');
+    }
   }
 
   render() {
