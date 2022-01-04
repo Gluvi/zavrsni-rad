@@ -21,6 +21,16 @@ class Chat extends React.Component {
     this.drone = new window.Scaledrone("5D9V0tsX5DxmjSvr", {
       data: this.state.member,
     });
+    console.log('Member ' + memberName +' logged in');
+  }
+
+  handleLogoutMember = () => {
+    this.setState({member: {username: '', color: 'red'}});
+    console.log('Member ' + this.state.member.username +' logged out');
+  }
+
+  handleSendMessage = (message) => {
+
     this.drone.on('open', error => {
       if(error){
         return console.error(error);
@@ -31,18 +41,10 @@ class Chat extends React.Component {
       this.setState({member});
     });
 
-  }
-
-  handleLogoutMember = () => {
-    this.setState({member: {username: '', color: 'red'}});
-    console.log('Member ' + this.state.member.username +' logged out');
-  }
-
-  handleSendMessage = (message) => {
     const room = this.drone.subscribe(soba);
     room.on('data', (data, id, member) => {
       const messages = this.state.messages;
-      messages.push({member: this.state.member, text: data, id: id});
+      messages.push({member, text: data, id: id});
       this.setState({messages});
       console.log('********');
       console.log({messages});
