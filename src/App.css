@@ -30,17 +30,13 @@
 }
 
 .Messages-message.currentMember {
-  /*justify-content: flex-end;*/
-  flex-direction: row-reverse;
+  justify-content: flex-end;
+  flex-direction: row;
   text-align: right;
 }
 
 .Message-content {
   display: inline-block;
-}
-
-.currentMember > .Message-content {
-  align-items: flex-end;
 }
 
 .Messages-message > .avatar {
@@ -96,4 +92,10 @@ button {
   border: none;
   border-radius: 8px;
   margin-left: 10px;
+}
+
+.Login {
+  position: relative;
+  bottom: 0px;
+  width: 100%;
 }

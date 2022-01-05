@@ -15,7 +15,7 @@ function UserLogin({onUserLogin}) {
     }
 
     return(
-        <div className='Messages-list'>
+        <div className='Messages-list Login'>
             <h1>User Login</h1>
             <form onSubmit={handleSubmitMemberName}>
                 <input onChange={handleChangeMemberName} value={username} autoFocus={true} />

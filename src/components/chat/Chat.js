@@ -44,6 +44,11 @@ class Chat extends React.Component {
         console.log('Room subscribed');
   
       });
+
+      // room.on('members', m => {
+      //   console.log(m);
+      // })
+
     }
     else {
       console.log('Enter username');
@@ -59,10 +64,18 @@ class Chat extends React.Component {
 
   render() {
     return (
+
+
       <div className="chat">
+         <div className="App-header">
           {
-            (!this.state.member.id) ? 
-            (<UserLogin onUserLogin={this.handleOnUserLogin}/>) : 
+            (this.state.member.id) ?
+            (<h1>Chat <button className='btnLogout' onClick={this.handleOnUserLogout}>Logout</button></h1>) :
+            (<h1>Chat</h1>)
+          }
+        </div>
+         {
+            (this.state.member.id) ? 
             (
             <div>
               <Messages
@@ -73,9 +86,9 @@ class Chat extends React.Component {
                 onSendMessage={this.onSendMessage}
                 onUserLogout={this.handleOnUserLogout}
               />
-              <button className='btnLogout' onClick={this.handleOnUserLogout}>Logout</button>
             </div>
-            )
+            ) :
+            (<UserLogin onUserLogin={this.handleOnUserLogin}/>)
           }
       </div>
     );

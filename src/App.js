@@ -6,9 +6,6 @@ function App() {
 
   return(
     <div className='App'>
-      <div className="App-header">
-          <h1>Završni rad - Chat</h1>
-      </div>
       <Chat />
     </div>
   );
