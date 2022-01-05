@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-let boja='';
 
 function UserLogin({onUserLogin}) {
     const [username, setUsername] = useState('');
@@ -19,7 +18,7 @@ function UserLogin({onUserLogin}) {
         <div className='Login'>
             <h1>User Login</h1>
             <form className='EnterUsername' onSubmit={handleSubmitMemberName}>
-                <input onChange={handleChangeMemberName} style={{backgroundColor: boja}} value={username} autoFocus={true} />
+                <input onChange={handleChangeMemberName} value={username} autoFocus={true} />
                 {(username !== '') ? (<button type='submit' >Login</button>) : (<button type='submit' disabled >Login</button>)}
             </form>
         </div>
