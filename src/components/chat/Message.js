@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 
 function Message({message, member}) {
     return(
-            (message.member.id === member.id) ?
+            (message.member.id !== member.id) ?
             (        
             <li className=' Messages-message'>
                 <div className='Message-content'>
