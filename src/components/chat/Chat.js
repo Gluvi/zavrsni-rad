@@ -25,7 +25,7 @@ class Chat extends React.Component {
         data: {username: user, color: randomColor()}
       });
       
-      headerUserName = user.toUpperCase();
+      headerUserName = user;
       console.log('User ' + user + ' logged in');
   
       this.drone.on('open', error => {
@@ -40,12 +40,14 @@ class Chat extends React.Component {
   
       });
       const room = this.drone.subscribe("observable-soba");
+      console.log('Room subscribed');
+
       room.on('data', (data, member) => {
         const messages = this.state.messages;
         messages.push({member, text: data});
         this.setState({messages});
   
-        console.log('Room subscribed');
+        console.log('Message sent');
   
       });
 

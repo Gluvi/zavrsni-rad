@@ -6,16 +6,16 @@ function Message({message, member}) {
             (        
             <li className=' Messages-message'>
                 <div className='Message-content'>
-                    <h5 className='text' style={{backgroundColor: message.member.clientData.color}}>{message.text}</h5>
-                    <h5 className='username'>Ja</h5>
+                    <h2 className='text' style={{backgroundColor: message.member.clientData.color}}>{message.text}</h2>
+                    <h4 className='username'>Ja</h4>
                 </div>
             </li>
             ) :
             (        
             <li className=' Messages-message currentMember'>
                 <div className='Message-content'>
-                    <h5 className='text' style={{backgroundColor: message.member.clientData.color}}>{message.text}</h5>
-                    <h5 className='username'>{message.member.clientData.username}</h5>
+                    <h2 className='text' style={{backgroundColor: message.member.clientData.color}}>{message.text}</h2>
+                    <h4 className='username'>{message.member.clientData.username}</h4>
                                     </div>
             </li>
             )
