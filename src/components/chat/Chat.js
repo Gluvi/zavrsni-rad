@@ -1,7 +1,10 @@
 import React from 'react';
 import UserLogin from '../user/UserLogin';
 import Messages from "./Messages";
-import SendMessage from "./SendMessage";
+import SendMessage from './SendMessage';
+import Header from '../static/Header';
+
+let headerUserName = '';
 
 function randomColor() {
   return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
@@ -21,7 +24,8 @@ class Chat extends React.Component {
       this.drone = new window.Scaledrone("5D9V0tsX5DxmjSvr", {
         data: {username: user, color: randomColor()}
       });
-  
+      
+      headerUserName = user.toUpperCase();
       console.log('User ' + user + ' logged in');
   
       this.drone.on('open', error => {
@@ -66,14 +70,12 @@ class Chat extends React.Component {
     return (
 
 
-      <div className="chat">
-         <div className="App-header">
-          {
-            (this.state.member.id) ?
-            (<h1>Chat <button className='btnLogout' onClick={this.handleOnUserLogout}>Logout</button></h1>) :
-            (<h1>Chat</h1>)
-          }
-        </div>
+      <div className="App">
+        <Header 
+          userName={headerUserName} 
+          member={this.state.member} 
+          logout={this.handleOnUserLogout} 
+        />
          {
             (this.state.member.id) ? 
             (

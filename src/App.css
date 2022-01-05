@@ -11,6 +11,15 @@
   width: 100%;
   text-align: center;
   color: white;
+  padding-top: 5px;
+}
+
+.Input{
+  position: fixed;
+  bottom: 0px;
+  background-color: #262626;
+  width: 100%;
+  padding: 10px;
 }
 
 .Messages-list {
@@ -19,9 +28,10 @@
   width: 100%;
   margin: 0 auto;
   list-style: none;
-  padding-left: 0;
+  padding: 10px 20px 60px;
   flex-grow: 1;
   overflow: auto;
+  position: static;
 }
 
 .Messages-message {
@@ -73,14 +83,14 @@ form {
   width: 100%;
   justify-content: space-between;
   max-width: 900px;
-  margin: 0 auto 40px;
+  margin: 0px;
 }
 
 input {
   padding: 5px;
   font-size: 16px;
   border-radius: 8px;
-  border: 1px solid orangered;
+  border: 1px solid transparent;
   flex-grow: 1;
 }
 
@@ -92,10 +102,30 @@ button {
   border: none;
   border-radius: 8px;
   margin-left: 10px;
+  border: 1px solid transparent;
+  transition: .4s;
+}
+
+button:disabled {
+  background-color: rgba(255, 68, 0, .5);
+  color: rgba(255, 255, 255, .5);
+  transition: .4s;
+}
+
+button:hover {
+  background-color: transparent;
+  color: orangered;
+  border: 1px solid orangered;
+  transition: .4s;
 }
 
 .Login {
   position: relative;
   bottom: 0px;
   width: 100%;
+}
+
+.Logout{
+  position: relative;
+  top: -5px;
 }

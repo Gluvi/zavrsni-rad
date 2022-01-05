@@ -8,10 +8,10 @@ class Messages extends React.Component {
   render() {
     const {messages} = this.props;
     const {currentMember} = this.props;
-
     return (
       <div className="Messages-list">
-        {messages.map((m, index) => (
+
+        {messages.reverse().map((m, index) => (
           <Message key={index} message={m} member={currentMember}/>
         ))}
       </div>
