@@ -103,6 +103,7 @@ input {
   border-radius: 8px;
   border: 1px solid transparent;
   flex-grow: 1;
+  border: 1px solid orangered;
 }
 
 button {
@@ -132,14 +133,42 @@ button:hover {
 }
 
 .Login {
-  position: relative;
+  position: fixed;
   bottom: 0px;
   width: 100%;
+  padding: 20px;
+  background-color: #262626;
+}
+
+.Login > h1{
+  color: white;
+}
+
+.LoginImage{
+  top: -200px;
+  left: -200px;
+  height: 200px;
+  width: 100%;
+  position: absolute;
+  padding: 25% 50% 0;
+}
+
+.Logo{
+  height: 400px;
+  width: 400px;
+  background-image: url('./assets/img/background.png');
+  background-size: cover;
 }
 
 .Logout{
   position: relative;
-  top: -5px;
+  top: 10px;
+  right: 10px;
+  float: right;
+}
+
+.EnterUsername{
+  min-width: 100%;
 }
 
 .username{

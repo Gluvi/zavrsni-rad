@@ -92,7 +92,15 @@ class Chat extends React.Component {
               />
             </div>
             ) :
-            (<UserLogin onUserLogin={this.handleOnUserLogin}/>)
+            (
+              <div>
+                <div className='LoginImage'>
+                  <div className='Logo'>
+                  </div>
+                </div>
+                <UserLogin onUserLogin={this.handleOnUserLogin}/>
+              </div>
+            )
           }
       </div>
     );
