@@ -62,7 +62,7 @@ class Chat extends React.Component {
   }
 
   handleOnUserLogout = () => {
-    this.setState({member: {}});
+    this.setState({messages: [], member: {}});
     this.drone.close();
 
     console.log('User logged out');

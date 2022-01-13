@@ -28,6 +28,8 @@
   margin: 0 auto;
   list-style: none;
   padding: 10px 20px 60px;
+  display: flex;
+  flex-direction: column-reverse;
   flex-grow: 1;
   overflow: auto;
   position: static;
