@@ -1,6 +1,6 @@
 import React from 'react';
 import UserLogin from '../user/UserLogin';
-import Messages from "./Messages";
+import MessageList from "./MessageList";
 import SendMessage from './SendMessage';
 import Header from '../static/Header';
 
@@ -82,7 +82,7 @@ class Chat extends React.Component {
             (this.state.member.id) ? 
             (
             <div>
-              <Messages
+              <MessageList
                 messages={this.state.messages}
                 currentMember={this.state.member}
               />
